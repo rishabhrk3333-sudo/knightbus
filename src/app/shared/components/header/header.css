@@ -1,0 +1,83 @@
+header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(13, 17, 40, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 28px;
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+}
+
+.brand-word {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: 0.01em;
+    color: var(--parchment);
+}
+
+.brand-word .accent {
+    color: var(--brass);
+}
+
+.brand-tag {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 2px;
+    display: block;
+    font-weight: 600;
+}
+
+nav.links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.navlink {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color .2s ease;
+}
+
+.navlink:hover,
+.navlink.active {
+    color: var(--parchment);
+}
+
+.btn-ghost {
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--parchment);
+    padding: 9px 18px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: border-color .2s ease, background .2s ease;
+}
+
+.btn-ghost:hover {
+    border-color: var(--brass);
+    background: rgba(201, 169, 97, 0.06);
+}

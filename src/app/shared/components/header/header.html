@@ -1,1 +1,13 @@
-<p>header works!</p>
+
+<div class="w-full h-16 bg-gray-800 text-white flex items-center justify-between px-4">
+  <div class="text-lg font-bold">Knightbus Coach Co.</div>
+  <nav class="space-x-4">
+    <a routerLink="/home" class="hover:underline">Home</a>
+    <a routerLink="/about" class="hover:underline">About</a>
+    <a routerLink="/services" class="hover:underline">Services</a>
+    <a routerLink="/contact" class="hover:underline">Contact</a>
+  </nav>
+    <div>
+    <button (click)="navigateTo('/login')">Sign In</button>
+    </div>
+ </div>

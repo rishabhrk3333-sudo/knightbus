@@ -1,0 +1,8 @@
+.page-container {
+      max-width: 1180px;      /* Maximum width on large screens */
+      width: 100%;             /* Takes full width on smaller screens */
+      margin: 0 auto;          /* Centers horizontally */
+      padding: 0 28px;         /* Prevents content from touching screen edges on mobile */
+      position: relative;
+      z-index: 1;
+}
