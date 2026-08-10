@@ -1,0 +1,55 @@
+:root {
+  /* ==========================================================================
+     Angular Material System Tokens — Knightbus theme (light mode default)
+     ========================================================================== */
+  --mat-sys-surface: #fbfaf6;
+  --mat-sys-surface-container: #ffffff;
+  --mat-sys-surface-container-high: #f1eee4;
+  --mat-sys-on-surface: #14172e;
+
+  /* Typography tokens */
+  --mat-sys-title-large-font: 'Fraunces', Georgia, serif;
+  --mat-sys-title-large-line-height: 28px;
+  --mat-sys-title-large-size: 22px;
+  --mat-sys-title-large-tracking: 0px;
+  --mat-sys-title-large-weight: 600;
+
+  /* ==========================================================================
+     Brand & UI Colors — brass / midnight palette
+     ========================================================================== */
+  --color-primary: #b8934e;       /* brass, deepened for contrast on light bg */
+  --color-primary-light: #d9b36c; /* brass-bright */
+  --color-primary-dark: #8a6b32;  /* pressed / hover state */
+  --color-accent: #5b6088;        /* muted steel-lavender, secondary accent */
+
+  /* State Colors */
+  --color-success: #2e7d32;
+  --color-warning: #ed6c02;
+  --color-error: #d32f2f;
+
+  /* Borders & Neutral Colors */
+  --color-border: #e4e1d4;
+  --color-text-muted: #5b6088;
+}
+
+/* Dark Mode Overrides */
+[data-theme='dark'],
+body.dark-mode {
+  --mat-sys-surface: #0d1128;
+  --mat-sys-surface-container: #161b3d;
+  --mat-sys-surface-container-high: #1d2450;
+  --mat-sys-on-surface: #edeae0;
+
+  --color-primary: #c9a961;
+  --color-primary-light: #e4c77e;
+  --color-primary-dark: #8a7238;
+  --color-accent: #7b82ac;
+
+  /* lightened for legibility against dark surfaces */
+  --color-success: #6fcf97;
+  --color-warning: #ffb86b;
+  --color-error: #ff6b6b;
+
+  --color-border: #2a3163;
+  --color-text-muted: #7b82ac;
+}

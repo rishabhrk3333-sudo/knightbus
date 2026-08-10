@@ -1,13 +1,40 @@
-
-<div class="w-full h-16 bg-gray-800 text-white flex items-center justify-between px-4">
-  <div class="text-lg font-bold">Knightbus Coach Co.</div>
-  <nav class="space-x-4">
-    <a routerLink="/home" class="hover:underline">Home</a>
-    <a routerLink="/about" class="hover:underline">About</a>
-    <a routerLink="/services" class="hover:underline">Services</a>
-    <a routerLink="/contact" class="hover:underline">Contact</a>
-  </nav>
-    <div>
-    <button (click)="navigateTo('/login')">Sign In</button>
+<mat-toolbar class="!h-18 !bg-[var(--mat-sys-surface)] !text-[var(--mat-sys-on-surface)] border-b border-[var(--color-border)] px-4 md:px-8 flex items-center justify-between">
+  <!-- Brand Logo & Title Group -->
+  <div class="flex items-center gap-3.5 cursor-pointer no-underline" routerLink="/home">
+    <div class="w-10 h-10 rounded-full border-[1.5px] border-[var(--color-primary)] text-[var(--color-primary)] flex items-center justify-center">
+      <!-- Bus/Coach Outline SVG -->
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+        <rect x="5" y="6" width="14" height="13" rx="3" />
+        <line x1="5" y1="11" x2="19" y2="11" />
+        <circle cx="8.5" cy="15.5" r="1.2" fill="currentColor" />
+        <circle cx="15.5" cy="15.5" r="1.2" fill="currentColor" />
+      </svg>
     </div>
- </div>
+    <div>
+      <div class="font-['Fraunces',serif] text-2xl font-semibold leading-tight text-[var(--mat-sys-on-surface)]">
+        Knight<span class="text-[var(--color-primary)]">bus</span>
+      </div>
+      <div class="text-[10px] tracking-[2.5px] font-medium text-[var(--color-text-muted)] mt-0.5">
+        OVERNIGHT COACH TRAVEL
+      </div>
+    </div>
+  </div>
+
+  <!-- Desktop Navigation Links -->
+  <nav class="hidden md:flex items-center gap-8">
+    <a routerLink="/routes" routerLinkActive="!text-[var(--color-primary)] opacity-100" class="text-[var(--mat-sys-on-surface)] no-underline text-sm opacity-85 hover:opacity-100 hover:text-[var(--color-primary)] transition-all">Routes</a>
+    <a routerLink="/my-tickets" routerLinkActive="!text-[var(--color-primary)] opacity-100" class="text-[var(--mat-sys-on-surface)] no-underline text-sm opacity-85 hover:opacity-100 hover:text-[var(--color-primary)] transition-all">My tickets</a>
+    <a routerLink="/help" routerLinkActive="!text-[var(--color-primary)] opacity-100" class="text-[var(--mat-sys-on-surface)] no-underline text-sm opacity-85 hover:opacity-100 hover:text-[var(--color-primary)] transition-all">Help</a>
+  </nav>
+
+  <!-- Sign In Button -->
+  <div class="flex items-center">
+    <button 
+      (click)="navigateTo('/login')"
+      class="!text-[var(--mat-sys-on-surface)] !border-[var(--color-border)] hover:!border-[var(--color-primary)] hover:!bg-[var(--color-primary)]/10 !rounded-full !px-6 !h-10 !text-sm transition-colors border"
+    >
+      Sign in
+    </button>
+  </div>
+</mat-toolbar>

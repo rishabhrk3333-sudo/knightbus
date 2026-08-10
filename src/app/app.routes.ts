@@ -35,15 +35,19 @@ export const routes: Routes = [
 
     // Authentication layout routes
     {
-        path: 'login',
+        path: '',
         loadComponent: () =>
             import('./layout/auth-layout/auth-layout').then(
                 (m) => m.AuthLayout),
         children: [
             {
-                path: '',
+                path: 'login',
                 loadComponent: () => import('./features/login/login').then((m) => m.Login),
-            }
+            },
+            {
+                path: 'register',
+                loadComponent: () => import('./features/register/register').then((m) => m.Register),
+            },
         ]
     },
     {

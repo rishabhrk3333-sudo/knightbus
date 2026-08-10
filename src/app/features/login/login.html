@@ -1,1 +1,134 @@
-<p>login works!</p>
+<div
+    class="min-h-screen bg-[var(--mat-sys-surface)] text-[var(--mat-sys-on-surface)] flex flex-col justify-center items-center px-4 py-12 relative transition-colors duration-300">
+
+    <!-- Theme Toggle Button (Top Right) -->
+    <button (click)="toggleTheme()" type="button" aria-label="Toggle theme"
+        class="absolute top-6 right-6 w-10 h-10 rounded-xl border border-[var(--color-border)] bg-[var(--mat-sys-surface-container)] text-[var(--mat-sys-on-surface)] flex items-center justify-center hover:border-[var(--color-primary)] transition-colors">
+        <!-- Sun Icon -->
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+    </button>
+
+    <div class="w-full max-w-md mx-auto space-y-8">
+
+        <!-- Brand Logo Header -->
+        <div class="flex items-center justify-center gap-3">
+            <div
+                class="w-10 h-10 rounded-full border-[1.5px] border-[var(--color-primary)] text-[var(--color-primary)] flex items-center justify-center">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                    <rect x="5" y="6" width="14" height="13" rx="3" />
+                    <line x1="5" y1="11" x2="19" y2="11" />
+                    <circle cx="8.5" cy="15.5" r="1.2" fill="currentColor" />
+                    <circle cx="15.5" cy="15.5" r="1.2" fill="currentColor" />
+                </svg>
+            </div>
+            <div class="font-['Fraunces',serif] text-2xl font-semibold leading-tight text-[var(--mat-sys-on-surface)]">
+                Knight<span class="text-[var(--color-primary)]">bus</span>
+            </div>
+        </div>
+
+        <!-- Title Header -->
+        <div class="text-center space-y-2">
+            <h1 class="font-['Fraunces',serif] text-4xl font-semibold text-[var(--mat-sys-on-surface)] tracking-tight">
+                Welcome back
+            </h1>
+            <p class="text-[var(--color-text-muted)] text-sm">
+                Sign in to manage your bookings.
+            </p>
+        </div>
+
+        <!-- Form Section -->
+        <form (ngSubmit)="onSubmit()" class="space-y-5">
+
+            <!-- Email Field -->
+            <div class="space-y-2">
+                <label class="block text-xs uppercase font-medium tracking-wider text-[var(--color-text-muted)]">
+                    EMAIL
+                </label>
+                <input type="email" placeholder="you@example.com"
+                    class="w-full h-12 px-4 rounded-lg bg-[var(--mat-sys-surface-container)] text-[var(--mat-sys-on-surface)] border border-[var(--color-border)] focus:border-[var(--color-primary)] focus:outline-none placeholder:text-[var(--color-text-muted)]/50 text-sm transition-colors"
+                    required />
+            </div>
+
+            <!-- Password Field -->
+            <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                    <label class="block text-xs uppercase font-medium tracking-wider text-[var(--color-text-muted)]">
+                        PASSWORD
+                    </label>
+                    <a routerLink="/forgot-password"
+                        class="text-xs text-[var(--color-primary)] hover:underline no-underline">
+                        Forgot?
+                    </a>
+                </div>
+                <div class="relative">
+                    <input [type]="hidePassword ? 'password' : 'text'" placeholder="••••••••"
+                        class="w-full h-12 pl-4 pr-11 rounded-lg bg-[var(--mat-sys-surface-container)] text-[var(--mat-sys-on-surface)] border border-[var(--color-border)] focus:border-[var(--color-primary)] focus:outline-none placeholder:text-[var(--color-text-muted)]/50 text-sm transition-colors"
+                        required />
+                    <button type="button" (click)="hidePassword = !hidePassword"
+                        class="absolute right-3.5 top-1/2 -translate-y-1/2 text-[var(--color-text-muted)] hover:text-[var(--mat-sys-on-surface)] focus:outline-none">
+                        <!-- Eye Icon Toggle -->
+                        <svg *if="hidePassword" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                        <svg *if="!hidePassword" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path
+                                d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24">
+                            </path>
+                            <line x1="1" y1="1" x2="23" y2="23"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Keep me signed in -->
+            <div class="flex items-center gap-2 pt-1">
+                <input type="checkbox" id="remember"
+                    class="w-4 h-4 rounded border-[var(--color-border)] accent-[var(--color-primary)] bg-[var(--mat-sys-surface-container)] cursor-pointer" />
+                <label for="remember" class="text-sm text-[var(--mat-sys-on-surface)] cursor-pointer select-none">
+                    Keep me signed in
+                </label>
+            </div>
+
+            <!-- Main Sign In Button -->
+            <button type="submit"
+                class="w-full h-12 rounded-lg bg-[var(--color-primary)] text-[#0d1128] font-medium text-base shadow-lg shadow-[var(--color-primary)]/15 hover:bg-[var(--color-primary-light)] active:bg-[var(--color-primary-dark)] transition-all cursor-pointer">
+                Sign in
+            </button>
+        </form>
+
+        <!-- Divider -->
+        <div class="relative my-6 text-center">
+            <div class="absolute inset-0 flex items-center">
+                <div class="w-full border-t border-[var(--color-border)]"></div>
+            </div>
+            <span class="relative px-4 text-xs text-[var(--color-text-muted)] bg-[var(--mat-sys-surface)]">
+                or continue with
+            </span>
+        </div>
+
+        <!-- Create Account Link -->
+        <div class="text-center text-sm text-[var(--color-text-muted)] pt-2">
+            New to Knightbus?
+            <span (click)="navigateToRegister()"
+                class="text-[var(--color-primary)] font-medium hover:underline no-underline ml-1">
+                Create an account
+            </span>
+        </div>
+
+    </div>
+</div>
