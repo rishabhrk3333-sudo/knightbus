@@ -1,14 +1,17 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../core/services/auth.service';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
 export class Login {
-  private route = inject(Router);
+  private router = inject(Router);
+  private authService = inject(AuthService);
   hidePassword = true;
 
   toggleTheme(): void {
@@ -22,19 +25,24 @@ export class Login {
     }
   }
 
-  onSubmit(): void {
-    // Handle authentication logic
-  }
 
-  loginWithGoogle(): void {
-    // Google OAuth integration
+  //method to handle login form submission
+  login(formData:NgForm): void {
+  const credentials = {
+    projectName: 'BusTicketBooking', 
+    email: formData.value.userName || '', 
+    password: formData.value.password || '', 
   }
-
-  loginWithApple(): void {
-    // Apple OAuth integration
-  }
+  this.authService.login(credentials).subscribe({
+    next: () => {
+      this.router.navigate(['/']);
+    },
+  });
+}
 
   navigateToRegister():void{
-    this.route.navigate(['/register']); 
+    this.router.navigate(['/register']); 
   }
+
+
 }
