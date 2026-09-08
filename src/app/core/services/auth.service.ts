@@ -8,13 +8,14 @@ import {
   LoginApiResponse,
   LoginRequest,
 } from '../models/auth.models';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private readonly http = inject(HttpClient);
-
+  private apiService = inject(ApiService);
   private readonly storageKey = 'knightbus_user';
 
   private readonly _user = signal<AuthUser | null>(
@@ -75,5 +76,11 @@ export class AuthService {
       localStorage.removeItem(this.storageKey);
       return null;
     }
+  }
+
+  //Method to call the register User API endpoint with the user form data
+  registerNewUser(userFormData: any): Observable<any> {
+    // console.log('Registering new user with data:', userFormData);
+    return this.apiService.post<any, any>('/register', userFormData);
   }
 }

@@ -8,7 +8,6 @@ import { API_CONFIG } from '../config/api.config';
 })
 export class ApiService {
   private readonly http = inject(HttpClient);
-
   private readonly baseUrl = API_CONFIG.baseUrl;
 
   get<T>(url: string) {
