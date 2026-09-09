@@ -110,7 +110,13 @@
             class="w-full h-12 pl-4 pr-11 rounded-lg bg-[var(--mat-sys-surface-container)] text-[var(--mat-sys-on-surface)] border border-[var(--color-border)] focus:border-[var(--color-primary)] focus:outline-none placeholder:text-[var(--color-text-muted)]/50 text-sm transition-colors"
             required
           />
+          @if(respsonseMessage()) {
+            <div class="text-xs text-[var(--color-error)] mt-1">
+              {{ respsonseMessage() }}
+            </div>
+          }
           <button
+            [disabled]="loginForm.invalid"
             type="button"
             (click)="hidePassword = !hidePassword"
             class="absolute right-3.5 top-1/2 -translate-y-1/2 text-[var(--color-text-muted)] hover:text-[var(--mat-sys-on-surface)] focus:outline-none"
@@ -118,6 +124,7 @@
             <!-- Eye Icon Toggle -->
             @if (hidePassword) {
               <svg
+                class="cursor-pointer"
                 width="18"
                 height="18"
                 viewBox="0 0 24 24"
@@ -130,6 +137,7 @@
               </svg>
             } @else {
               <svg
+                class="cursor-pointer"
                 width="18"
                 height="18"
                 viewBox="0 0 24 24"
@@ -147,15 +155,6 @@
         </div>
       </div>
 
-      <!-- Keep me signed in -->
-      <!-- <div class="flex items-center gap-2 pt-1">
-                <input type="checkbox" id="remember"
-                    class="w-4 h-4 rounded border-[var(--color-border)] accent-[var(--color-primary)] bg-[var(--mat-sys-surface-container)] cursor-pointer" />
-                <label for="remember" class="text-sm text-[var(--mat-sys-on-surface)] cursor-pointer select-none">
-                    Keep me signed in
-                </label>
-            </div> -->
-
       <!-- Main Sign In Button -->
       <button
         type="submit"
@@ -165,22 +164,12 @@
       </button>
     </form>
 
-    <!-- Divider -->
-    <!-- <div class="relative my-6 text-center">
-            <div class="absolute inset-0 flex items-center">
-                <div class="w-full border-t border-[var(--color-border)]"></div>
-            </div>
-            <span class="relative px-4 text-xs text-[var(--color-text-muted)] bg-[var(--mat-sys-surface)]">
-                or continue with
-            </span>
-        </div> -->
-
     <!-- Create Account Link -->
     <div class="text-center text-sm text-[var(--color-text-muted)] pt-2">
       New to Knightbus?
       <span
         (click)="navigateToRegister()"
-        class="text-[var(--color-primary)] font-medium hover:underline no-underline ml-1"
+        class="text-[var(--color-primary)] cursor-pointer font-medium hover:underline no-underline ml-1"
       >
         Create an account
       </span>

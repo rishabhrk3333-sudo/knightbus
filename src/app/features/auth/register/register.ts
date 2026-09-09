@@ -14,7 +14,7 @@ import { NumbersOnly } from '../../../shared/directives/numbers-only-validation/
 
 @Component({
   selector: 'app-register',
-  imports: [RouterLink, ReactiveFormsModule,ShowErrorPipe, MatSnackBarModule, NumbersOnly],
+  imports: [RouterLink, ReactiveFormsModule, ShowErrorPipe, MatSnackBarModule, NumbersOnly],
   templateUrl: './register.html',
   styleUrl: './register.css',
 })
@@ -27,8 +27,6 @@ export class Register implements OnInit {
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
-
-  // errosMessage = VALIDATION_CONSTANTS;
 
   toggleTheme(): void {
     const isDark = document.body.classList.contains('dark-mode');
@@ -47,7 +45,7 @@ export class Register implements OnInit {
     this.registerForm = this.fb.group({
       fullName: ['', Validators.required],
       emailId: ['', [Validators.required, Validators.email]],
-      mobileNumber: ['',Validators.required],
+      mobileNumber: ['', Validators.required],
       password: ['', Validators.required],
       terms: ['', [Validators.required]],
     });
@@ -77,10 +75,12 @@ export class Register implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (response) => {
-          this._snackBar.open('User registered successfully', 'Splash', {
+          this._snackBar.open('User registered successfully', 'x', {
             horizontalPosition: this.horizontalPosition,
             verticalPosition: this.verticalPosition,
+            duration: 1000,
           });
+          this.authService.navigateToLogin();
         },
         error: (error) => {
           console.error('Error registering user:', error);

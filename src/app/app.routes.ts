@@ -32,24 +32,8 @@ export const routes: Routes = [
   },
   //auth routes
   {
-    path: 'login',
-    loadComponent: () => import('./layout/auth-layout/auth-layout').then((m) => m.AuthLayout),
-    children: [
-      {
-        path: '',
-        loadComponent: () => import('./features/auth/login/login').then((m) => m.Login),
-      },
-    ],
-  },
-  {
-    path: 'register',
-    loadComponent: () => import('./layout/auth-layout/auth-layout').then((m) => m.AuthLayout),
-    children: [
-      {
-        path: '',
-        loadComponent: () => import('./features/auth/register/register').then((m) => m.Register),
-      },
-    ],
+    path: 'auth',
+    loadChildren: () => import('./features/auth/auth.router').then((m) => m.AUTH_ROUTES),
   },
 
   //admin routes

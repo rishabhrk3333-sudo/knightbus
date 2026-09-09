@@ -3,12 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
-import {
-  AuthUser,
-  LoginApiResponse,
-  LoginRequest,
-} from '../models/auth.models';
+import { AuthUser, LoginApiResponse, LoginRequest } from '../models/auth.models';
 import { ApiService } from './api.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -16,64 +13,59 @@ import { ApiService } from './api.service';
 export class AuthService {
   private readonly http = inject(HttpClient);
   private apiService = inject(ApiService);
+  private router = inject(Router);
   private readonly storageKey = 'knightbus_user';
 
-  private readonly _user = signal<AuthUser | null>(
-    this.loadUser(),
-  );
+  private readonly _user = signal<AuthUser | null>(this.loadUser());
 
   readonly user = this._user.asReadonly();
 
-  readonly isAuthenticated = computed(
-    () => this._user() !== null,
-  );
+  readonly isAuthenticated = computed(() => this._user() !== null);
+
+  navigateToLogin(): void {
+  this.router.navigate(['/auth/login']);
+  }
 
   login(credentials: LoginRequest): Observable<LoginApiResponse> {
-    return this.http
-      .post<LoginApiResponse>(
-        `${environment.apiUrl}/login`,
-        credentials,
-      )
-      .pipe(
-        tap((response) => {
-          const user: AuthUser = {
-            id: response.id,
-            fullName: response.fullName,
-            email: response.email,
-            mobileNo: response.mobileNo,
-            projectName: response.projectName,
-            roleId: response.roleId,
-            roleName: response.roleName,
-            isActive: response.isActive,
-            createdOn: response.createdOn,
-          };
+    return this.http.post<LoginApiResponse>(`${environment.apiUrl}/login`, credentials).pipe(
+      tap((response) => {
+        const user: AuthUser = {
+          id: response.id,
+          fullName: response.fullName,
+          email: response.email,
+          mobileNo: response.mobileNo,
+          projectName: response.projectName,
+          roleId: response.roleId,
+          roleName: response.roleName,
+          isActive: response.isActive,
+          createdOn: response.createdOn,
+        };
 
-          this._user.set(user);
+        this._user.set(user);
 
-          localStorage.setItem(
-            this.storageKey,
-            JSON.stringify(user),
-          );
-        }),
-      );
+        sessionStorage.setItem(this.storageKey, JSON.stringify(user));
+      }),
+    );
   }
 
   logout(): void {
     this._user.set(null);
-    localStorage.removeItem(this.storageKey);
+    sessionStorage.removeItem(this.storageKey);
   }
 
+  /**
+   * 
+   * @returns Method to load logged In user Data form session storage.
+   */
   private loadUser(): AuthUser | null {
-    const storedUser = localStorage.getItem(this.storageKey);
-
+    const storedUser = sessionStorage.getItem(this.storageKey);
     if (!storedUser) {
       return null;
     }
-
     try {
       return JSON.parse(storedUser) as AuthUser;
     } catch {
-      localStorage.removeItem(this.storageKey);
+      sessionStorage.removeItem(this.storageKey);
       return null;
     }
   }

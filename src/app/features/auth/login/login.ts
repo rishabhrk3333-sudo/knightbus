@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { FormsModule, NgForm } from '@angular/forms';
@@ -14,6 +14,7 @@ export class Login {
   private router = inject(Router);
   private authService = inject(AuthService);
   hidePassword = true;
+  respsonseMessage = signal<string | null>(null);
 
   toggleTheme(): void {
     const isDark = document.body.classList.contains('dark-mode');
@@ -35,14 +36,17 @@ export class Login {
     password: formData.value.password || '', 
   }
   this.authService.login(credentials).subscribe({
-    next: () => {
+    next: (res) => {
       this.router.navigate(['/']);
     },
+    error:(err)=>{
+      this.respsonseMessage.set(err.error || 'Login failed. Please try again.');
+    }
   });
 }
 
   navigateToRegister():void{
-    this.router.navigate(['/register']); 
+    this.router.navigate(['/auth/register']); 
   }
 
 
