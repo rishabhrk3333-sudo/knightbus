@@ -37,7 +37,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        loadComponent: () => import('./features/login/login').then((m) => m.Login),
+        loadComponent: () => import('./features/auth/login/login').then((m) => m.Login),
       },
     ],
   },
@@ -47,7 +47,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        loadComponent: () => import('./features/register/register').then((m) => m.Register),
+        loadComponent: () => import('./features/auth/register/register').then((m) => m.Register),
       },
     ],
   },
@@ -66,15 +66,10 @@ export const routes: Routes = [
     ],
   },
 
-  //not found route
-  {
-    path: 'not-found',
-    loadComponent: () => import('./features/not-found/not-found').then((m) => m.NotFound),
-  },
 
   //wildcard route
   {
     path: '**',
-    redirectTo: 'not-found',
+    loadComponent: () => import('./features/not-found/not-found').then((m) => m.NotFound),
   },
 ];

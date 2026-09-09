@@ -1,6 +1,5 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from '../../core/services/auth.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   MatSnackBar,
@@ -8,12 +7,14 @@ import {
   MatSnackBarModule,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
-import { routes } from '../../app.routes';
 import { RouterLink } from '@angular/router';
+import { ShowErrorPipe } from '../../../core/pipes/show-error-pipe';
+import { AuthService } from '../../../core/services/auth.service';
+import { NumbersOnly } from '../../../shared/directives/numbers-only-validation/numbers-only';
 
 @Component({
   selector: 'app-register',
-  imports: [RouterLink, ReactiveFormsModule, MatSnackBarModule],
+  imports: [RouterLink, ReactiveFormsModule,ShowErrorPipe, MatSnackBarModule, NumbersOnly],
   templateUrl: './register.html',
   styleUrl: './register.css',
 })
@@ -26,6 +27,8 @@ export class Register implements OnInit {
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
+
+  // errosMessage = VALIDATION_CONSTANTS;
 
   toggleTheme(): void {
     const isDark = document.body.classList.contains('dark-mode');
@@ -44,10 +47,15 @@ export class Register implements OnInit {
     this.registerForm = this.fb.group({
       fullName: ['', Validators.required],
       emailId: ['', [Validators.required, Validators.email]],
-      mobileNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+      mobileNumber: ['',Validators.required],
       password: ['', Validators.required],
       terms: ['', [Validators.required]],
     });
+  }
+
+  isValid(fieldName: string): boolean {
+    const field = this.registerForm.get(fieldName);
+    return field ? field.valid || !field.touched : false;
   }
 
   onSubmit(): void {
@@ -58,12 +66,17 @@ export class Register implements OnInit {
 
   //Method to register a new user by calling the AuthService's registerNewUser method and handling the response
   registerUser(userFormData: any): void {
+    const payload = {
+      fullName: userFormData.fullName,
+      email: userFormData.emailId,
+      mobileNo: userFormData.mobileNumber,
+      password: userFormData.password,
+    };
     this.authService
-      .registerNewUser(userFormData)
+      .registerNewUser(payload)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (response) => {
-          console.log('User registered successfully:', response);
           this._snackBar.open('User registered successfully', 'Splash', {
             horizontalPosition: this.horizontalPosition,
             verticalPosition: this.verticalPosition,

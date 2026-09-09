@@ -101,6 +101,19 @@
           placeholder="you@example.com"
           class="w-full h-12 px-4 rounded-lg bg-[var(--mat-sys-surface-container)] text-[var(--mat-sys-on-surface)] border border-[var(--color-border)] focus:border-[var(--color-primary)] focus:outline-none placeholder:text-[var(--color-text-muted)]/50 text-sm transition-colors"
         />
+      
+          @if(isValid('emailId') && registerForm.get('emailId')?.errors?.['required']) {
+            <span class="text-xs text-red-500 mt-1">
+            {{ 'REQUIRED' | showError }}
+            </span>
+          }
+          @if(isValid('emailId') && registerForm.get('emailId')?.errors?.['email']) {
+            <span class="text-xs text-red-500 mt-1">
+            {{ 'INVALID_EMAIL' | showError }}
+            </span>
+          }
+         
+   
       </div>
            <!-- Mobile Number Field -->
       <div class="space-y-1.5">
@@ -111,6 +124,7 @@
         </label>
         <input
           type="text"
+          appNumbersOnly
           formControlName="mobileNumber"
           placeholder="Enter your mobile number"
           class="w-full h-12 px-4 rounded-lg bg-[var(--mat-sys-surface-container)] text-[var(--mat-sys-on-surface)] border border-[var(--color-border)] focus:border-[var(--color-primary)] focus:outline-none placeholder:text-[var(--color-text-muted)]/50 text-sm transition-colors"

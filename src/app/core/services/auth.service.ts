@@ -81,6 +81,6 @@ export class AuthService {
   //Method to call the register User API endpoint with the user form data
   registerNewUser(userFormData: any): Observable<any> {
     // console.log('Registering new user with data:', userFormData);
-    return this.apiService.post<any, any>('/register', userFormData);
+    return this.apiService.post<any, any>('/customers/register', userFormData);
   }
 }
